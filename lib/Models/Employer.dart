@@ -36,8 +36,8 @@ class Employer extends Person {
   }
 
   @override
-  bool save<Employer>(Employer person) {
-    // TODO: implement save
-    throw UnimplementedError();
+  bool save() {
+    employeeRecords.add(this);
+    return true;
   }
 }

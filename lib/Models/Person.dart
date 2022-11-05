@@ -5,5 +5,5 @@ abstract class Person {
   String? phoneNumber;
   String? eMail;
 
-  bool save<T>(T person);
+  bool save();
 }
