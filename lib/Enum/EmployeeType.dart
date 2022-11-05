@@ -7,4 +7,4 @@ enum EmployeeType {
   humanResource,
 }
 
-enum jobType { partTime, fulltime }
+enum JobType { partTime, fulltime }

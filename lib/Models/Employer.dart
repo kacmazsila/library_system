@@ -11,7 +11,7 @@ class Employer extends Person {
   String? jobPhone;
   double? salary;
   int countOfBook = 0;
-  jobType? jType;
+  JobType? jType;
 
   List<Employer> employeeRecords = List.empty();
 
