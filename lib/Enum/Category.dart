@@ -1,1 +1,1 @@
-enum Category { Masal, Macera, Fantastik, Tarih, Aksiyon, BilimKurgu, Ask }
+enum BookCategory { Masal, Macera, Fantastik, Tarih, Aksiyon, BilimKurgu, Ask }

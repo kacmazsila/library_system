@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:library_system/Enum/Category.dart';
 
 class BookRecord extends StatefulWidget {
   const BookRecord({super.key});
@@ -21,9 +23,12 @@ class _BookRecordState extends State<BookRecord> {
       ),
       body: Center(
         child: Column(children: [
-          // Padding(
-          //     padding: EdgeInsets.all(8),
-          //     child: Image.asset('assets/images/book.jpeg')),
+          Container(
+              child: Image.asset(
+            'assets/images/book.jpeg',
+            width: 200,
+            height: 200,
+          )),
           Padding(
             padding: EdgeInsets.all(8),
             child: TextFormField(
@@ -46,6 +51,17 @@ class _BookRecordState extends State<BookRecord> {
                   hintText: 'Yazar Adı'),
             ),
           ),
+          // Padding(
+          //   padding: EdgeInsets.all(8),
+          //   child: DropdownButton<BookCategory>(
+          //     onChanged: (BookCategory? newValue) {
+          //       setState(() {});
+          //     },
+          //     items: BookCategory.values.map((BookCategory value) {
+          //       return DropdownMenuItem<BookCategory>(child: Text(value.name));
+          //     }).toList(),
+          //   ),
+          // )
         ]),
       ),
     );
