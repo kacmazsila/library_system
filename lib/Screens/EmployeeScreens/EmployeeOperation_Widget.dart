@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:library_system/Models/Employer.dart';
+import 'package:library_system/Screens/EmployeeScreens/EmployeeDetailWidget.dart';
+
+import '../../Enum/EmployeeType.dart';
 
 class EmployeeOperation_Widget extends StatefulWidget {
   const EmployeeOperation_Widget({super.key});
@@ -17,7 +20,9 @@ class _EmployeeOperation_WidgetState extends State<EmployeeOperation_Widget> {
   TextEditingController ctPhone = TextEditingController();
   TextEditingController ctEmail = TextEditingController();
 
-  List<Employer> lstEmployees = List.empty();
+  List<Employer> lstEmployees = <Employer>[];
+
+  EmployeeType? selectedEmpType;
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +75,38 @@ class _EmployeeOperation_WidgetState extends State<EmployeeOperation_Widget> {
                 ),
               ),
               Padding(
+                padding: const EdgeInsets.all(5),
+                child: DropdownButton<EmployeeType>(
+                  onChanged: (EmployeeType? newValue) {
+                    setState(() {
+                      selectedEmpType = newValue;
+                    });
+                  },
+                  items: EmployeeType.values.map((EmployeeType value) {
+                    return DropdownMenuItem<EmployeeType>(
+                      value: value,
+                      child: Text(value.name),
+                    );
+                  }).toList(),
+                ),
+              ),
+              // !lstEmployees.isEmpty
+              //     ? Padding(
+              //         padding: const EdgeInsets.all(5),
+              //         child: DropdownButton<Employer>(
+              //           onChanged: (Employer? newValue) {
+              //             setState(() {});
+              //           },
+              //           items: lstEmployees.map((Employer value) {
+              //             return DropdownMenuItem<Employer>(
+              //               value: value,
+              //               child: Text(value.firstName.toString()),
+              //             );
+              //           }).toList(),
+              //         ),
+              //       )
+              //     : Container(),
+              Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
                   onPressed: saveEmployee,
@@ -78,13 +115,32 @@ class _EmployeeOperation_WidgetState extends State<EmployeeOperation_Widget> {
               ),
               !lstEmployees.isEmpty
                   ? Container(
-                      height: 50,
+                      height: 250,
                       child: ListView.builder(
                           itemCount: lstEmployees.length,
                           itemBuilder: (context, index) {
-                            return ListTile(
-                              title: Text(
-                                  lstEmployees[index].firstName.toString()),
+                            return Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(2.0),
+                                child: ListTile(
+                                  title: Text(
+                                      lstEmployees[index].firstName.toString()),
+                                  subtitle: Text(
+                                      lstEmployees[index].lastName.toString()),
+                                  leading: Icon(Icons.person),
+                                  trailing: Icon(Icons.arrow_forward),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              EmployeeDetailWidget(
+                                                  employee:
+                                                      lstEmployees[index]),
+                                        ));
+                                  },
+                                ),
+                              ),
                             );
                           }),
                     )
@@ -105,8 +161,13 @@ class _EmployeeOperation_WidgetState extends State<EmployeeOperation_Widget> {
     emp.eMail = ctEmail.text.toString();
 
     setState(() {
-      emp.save();
-      lstEmployees = emp.getEmployees();
+      //emp.save();
+      // lstEmployees = emp.getEmployees();
+      lstEmployees.add(emp);
+      ctName.text = "";
+      ctLastName.text = "";
+      ctEmail.text = "";
+      ctPhone.text = "";
     });
   }
 }
