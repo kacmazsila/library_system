@@ -13,7 +13,7 @@ class Employer extends Person {
   int countOfBook = 0;
   JobType? jType;
 
-  List<Employer> employeeRecords = List.empty();
+  List<Employer> employeeRecords = <Employer>[];
 
   List<Employer> getEmployees() {
     return employeeRecords;
